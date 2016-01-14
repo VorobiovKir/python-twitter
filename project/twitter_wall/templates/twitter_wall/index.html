@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <title>Twitter</title>
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
+        <style type="text/css">
+        .twit-txt {
+            font-size: 18px;
+            font-weight: bold;
+        }
+        .twit-date {
+            color: rgb(128, 128, 128);
+            font-size: 12px;
+        }
+        .twit-head {
+            color: rgb(50, 50, 255);
+            font-weight: bold;
+            font-size: 20px;
+            text-align: center;
+        }
+        .twit-post, .twit-post-btn {
+            height: 35px;
+
+        }
+        </style>
+    </head>
+    <body>
+        <div class="content">
+            <div class="panel panel-default">
+                <div class="panel-heading"><h3 class="panel-title twit-head">Twitter</h3></div>
+                <div class="panel-body">
+                    {% for tweet in tweets.tweets %}
+                        <p class="row">
+                            <span class="twit-txt col-sm-8">{{ tweet.status }}</span>
+                            <span class="twit-date col-sm-3 col-sm-offset-1">{{ tweet.date }}</span>
+                        </p>
+                    {% endfor %}
+                    <p class="form-inline">
+                    <form method="POST" action="">
+                    {% csrf_token %}
+                        <input type="text" class="col-sm-8 col-offset-1 twit-post form-control" placeholder="Post tweet" name="twit-post-name">
+                        <button class="btn btn-info col-sm-2 col-sm-offset-1 twit-post-btn">Post</button>
+                    </form>
+                    </p>
+                </div>
+            </div>
+            <div class="panel-footer">Panel footer</div>
+        </div>
+
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"></script>
+    </body>
+</html>
