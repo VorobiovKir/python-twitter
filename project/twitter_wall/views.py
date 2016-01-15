@@ -36,7 +36,7 @@ class TwitListView(TemplateView):
         tweets = []
         try:
             api = self.init_api()
-            items = api.GetUserTimeline(screen_name='Kir_LightIT')
+            items = api.GetUserTimeline(screen_name='Metallica')
             latest = self.paginated(items, self.page)
             for tweet in latest:
                 status = tweet.text

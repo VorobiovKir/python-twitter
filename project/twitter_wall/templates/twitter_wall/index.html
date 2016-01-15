@@ -33,12 +33,12 @@
                 <div class="panel panel-default">
                     <div class="panel-heading"><h3 class="panel-title twit-head">Twitter</h3></div>
                     <div class="panel-body">
-                        <h1>{{ tweets.tweets| length }}</h1>
                         {% for tweet in tweets.tweets %}
                             <p class="row">
                                 <span class="twit-txt col-sm-8">{{ tweet.status }}</span>
                                 <span class="twit-date col-sm-3 col-sm-offset-1">{{ tweet.date }}</span>
                             </p>
+                            <hr>
                         {% endfor %}
                         <p class="form-inline">
                         <form method="POST" action="">
