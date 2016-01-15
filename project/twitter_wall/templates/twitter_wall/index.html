@@ -22,12 +22,17 @@
             text-align: center;
         }
         .twit-post, .twit-post-btn {
-            height: 35px;
+            width: 100%;
+            margin-bottom: 0px;
         }
 
         </style>
     </head>
     <body>
+    {% if not user.is_authenticated %}
+        <a href="{% url 'social:begin' 'twitter' %}">Twitter Login</a>
+    {% else %}
+        <h1>Hello {{ user }}</h1>
         <div class="row">
             <div class="content col-sm-offset-4 col-sm-4">
                 <div class="panel panel-default">
@@ -43,15 +48,17 @@
                         <p class="form-inline">
                         <form method="POST" action="">
                         {% csrf_token %}
-                            <input type="text" class="col-sm-8 col-offset-1 twit-post form-control" placeholder="Post tweet" name="twit-post-name">
-                            <button class="btn btn-info col-sm-2 col-sm-offset-1 twit-post-btn">Post</button>
+                            <input type="text" class="twit-post form-control" placeholder="Type tweet" name="twit-post-name">
+                            <button class="btn btn-info twit-post-btn">Create</button>
                         </form>
                         </p>
                     </div>
                 </div>
-                <div class="panel-footer">Panel footer</div>
+                <div class="panel-footer">python-twitter</div>
             </div>
         </div>
+        <a href="{% url 'twit:twit-logout' %}">Log Out</a>
+    {% endif %}
 
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"></script>
     </body>

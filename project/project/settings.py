@@ -37,9 +37,19 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'django.contrib.sites',
 
-    'twitter_wall'
+    'allauth',
+    'allauth.account',
+    'allauth.socialaccount',
+    'allauth.socialaccount.providers.twitter',
+
+    'social.apps.django_app.default',
+
+    'twitter_wall',
 ]
+
+SITE_ID = 1
 
 MIDDLEWARE_CLASSES = [
     'django.middleware.security.SecurityMiddleware',
@@ -121,3 +131,13 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/1.9/howto/static-files/
 
 STATIC_URL = '/static/'
+
+AUTHENTICATION_BACKENDS = (
+    'social.backends.twitter.TwitterOAuth',
+    'django.contrib.auth.backends.ModelBackend',
+)
+
+SOCIAL_AUTH_LOGIN_REDIRECT_URL = '/twit/list'
+
+SOCIAL_AUTH_TWITTER_KEY = 'nQ1FbhLREforyjU3rmfE0mOai'
+SOCIAL_AUTH_TWITTER_SECRET = '3uaNilLha1dnpRvst6I2n5LcAnXFgH2nobGt74kr909XtJaxeS'

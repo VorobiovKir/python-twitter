@@ -17,6 +17,8 @@ from django.conf.urls import url, include
 from django.contrib import admin
 
 urlpatterns = [
+    url('', include('social.apps.django_app.urls', namespace='social')),
     url(r'^admin/', admin.site.urls),
-    url(r'^twit/', include('twitter_wall.urls', namespace='twit'))
+    url(r'^twit/', include('twitter_wall.urls', namespace='twit')),
+    url(r'^accounts/', include('allauth.urls')),
 ]
