@@ -22,13 +22,13 @@
         }
         .twit-post, .twit-post-btn {
             width: 100%;
-            margin-bottom: 0px;
+            margin-bottom: 5px;
         }
         </style>
     </head>
     <body>
     {% if not user.is_authenticated %}
-        <a href="{% url 'social:begin' 'twitter' %}">Twitter Login</a>
+        <a class="btn btn-info" href="{% url 'social:begin' 'twitter' %}">Twitter Login</a>
     {% else %}
         <div class="row">
             <div class="content col-sm-offset-4 col-sm-4">
@@ -38,11 +38,18 @@
                         <h3 class="panel-title twit-head">{{ tweets_content.user_detail.name }}</h3>
                     </div>
                     <div class="panel-body">
-                        <ul>
-                            {% for user in authenticated_user %}
-                                <li><a href="{% url 'twit:twit-list' %}">{{ user.user }}</a></li>
-                            {% endfor %}
-                        </ul>
+                        {% for user in authenticated_user %}
+                            <p><a href="{% url 'twit:twit-list' %}?usid={{user.user.id}}">{{ user.user }}</a></p>
+                        {% endfor %}
+                        <hr>
+                        <p class="form-inline">
+                            <form method="POST" action="{% url 'twit:twit-add' %}">
+                            {% csrf_token %}
+                                <!-- <input type="text" class="twit-post form-control" placeholder="Type tweet" name="twit-post-name"> -->
+                                <textarea class="twit-post form-control" rows="3" name="twit-post-name"></textarea>
+                                <button class="btn btn-info twit-post-btn">Create</button>
+                            </form>
+                        </p>
                         <hr>
                         {% for tweet in tweets_content.tweets %}
                             <p class="row">
@@ -51,13 +58,6 @@
                             </p>
                             <hr>
                         {% endfor %}
-                        <p class="form-inline">
-                        <form method="POST" action="">
-                        {% csrf_token %}
-                            <input type="text" class="twit-post form-control" placeholder="Type tweet" name="twit-post-name">
-                            <button class="btn btn-info twit-post-btn">Create</button>
-                        </form>
-                        </p>
                     </div>
                 </div>
                 <h3>Followers: </h3>
@@ -66,10 +66,10 @@
                         <li>{{ follower.screen_name }}</li>
                     {% endfor %}
                 </ul>
-                <div class="panel-footer">python-twitter</div>
+                <hr>
+                <a href="{% url 'twit:twit-logout' %}" class="btn btn-primary">Logout</a>
             </div>
         </div>
-        <a href="{% url 'twit:twit-logout' %}">Log Out</a>
     {% endif %}
 
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"></script>

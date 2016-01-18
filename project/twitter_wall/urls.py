@@ -21,6 +21,7 @@ from . import views
 
 urlpatterns = [
     url(r'^list/$', TwitListView.as_view(), name='twit-list'),
+    url(r'^add/$', views.addTwit, name='twit-add'),
     url(r'^$', IndexView.as_view(), name='twit-home'),
-    url(r'^logout/$', views.logout, name='twit-logout')
+    url(r'^logout/$', views.logOut, name='twit-logout'),
 ]

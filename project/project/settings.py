@@ -29,8 +29,7 @@ ALLOWED_HOSTS = []
 
 
 # Application definition
-
-INSTALLED_APPS = [
+DJANGO_APPS = [
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -38,18 +37,18 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'django.contrib.sites',
+]
 
-    'allauth',
-    'allauth.account',
-    'allauth.socialaccount',
-    'allauth.socialaccount.providers.twitter',
-
+VENDOR_APPS = [
     'social.apps.django_app.default',
-
-    'twitter_wall',
-
     'debug_toolbar',
 ]
+
+PROJECT_APPS = [
+    'twitter_wall',
+]
+
+INSTALLED_APPS = DJANGO_APPS + VENDOR_APPS + PROJECT_APPS
 
 SITE_ID = 1
 
@@ -143,3 +142,17 @@ SOCIAL_AUTH_LOGIN_REDIRECT_URL = '/twit/list'
 
 SOCIAL_AUTH_TWITTER_KEY = 'nQ1FbhLREforyjU3rmfE0mOai'
 SOCIAL_AUTH_TWITTER_SECRET = '3uaNilLha1dnpRvst6I2n5LcAnXFgH2nobGt74kr909XtJaxeS'
+
+PIPELINE = (
+  'social.pipeline.social_auth.social_details',
+  'social.pipeline.social_auth.social_uid',
+  'social.pipeline.social_auth.auth_allowed',
+  'social.pipeline.social_auth.social_user',
+  'social.pipeline.user.get_username',
+  # 'social.pipeline.mail.mail_validation',
+  'social.pipeline.social_auth.associate_by_email',
+  'social.pipeline.user.create_user',
+  'social.pipeline.social_auth.associate_user',
+  'social.pipeline.social_auth.load_extra_data',
+  'social.pipeline.user.user_details'
+)

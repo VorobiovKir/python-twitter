@@ -15,10 +15,12 @@ Including another URLconf
 """
 from django.conf.urls import url, include
 from django.contrib import admin
+from django.views.generic import RedirectView
 
 urlpatterns = [
     url('', include('social.apps.django_app.urls', namespace='social')),
     url(r'^admin/', admin.site.urls),
+    url(r'^$', RedirectView.as_view(pattern_name='twit:twit-list', permanent=False)),
+    url('', include('django.contrib.auth.urls', namespace='auth')),
     url(r'^twit/', include('twitter_wall.urls', namespace='twit')),
-    url(r'^accounts/', include('allauth.urls')),
 ]
