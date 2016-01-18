@@ -27,7 +27,7 @@
         </style>
     </head>
     <body>
-    {% if not user.is_authenticated %}
+    {% if not tweets_content.user_detail %}
         <a class="btn btn-info" href="{% url 'twit:twit-login' %}">Twitter Login</a>
     {% else %}
         <div class="row">
