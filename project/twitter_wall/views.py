@@ -1,6 +1,7 @@
 from django.shortcuts import redirect
 from django.contrib.auth import logout
 from django.views.generic import TemplateView
+from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 
 from social.apps.django_app.default.models import UserSocialAuth
 
@@ -52,11 +53,21 @@ class TwitListView(TemplateView):
 
     """
     template_name = 'twitter_wall/index.html'
+    paginate_by = 5
 
     def get_context_data(self, **kwargs):
         context = super(TwitListView, self).get_context_data(**kwargs)
-        context['tweets_content'] = self.getTwitContent()
         context['authenticated_user'] = UserSocialAuth.objects.all()
+        context['tweets_content'] = self.getTwitContent()
+        tweets = context['tweets_content']['tweets']
+        paginator = Paginator(tweets, self.paginate_by)
+        page = self.request.GET.get('page')
+        try:
+            context['tweets_content']['tweets'] = paginator.page(page)
+        except PageNotAnInteger:
+            context['tweets_content']['tweets'] = paginator.page(1)
+        except EmptyPage:
+            context['tweets_content']['tweets'] = paginator.page(paginator.num_pages)
 
         return context
 
@@ -105,5 +116,7 @@ def logOut(request):
     return redirect('/')
 
 
-# class IndexView(TemplateView):
-#     template_name = 'twitter_wall/index.html'
+def login(request):
+    if request.user.is_authenticated():
+        logout(request)
+    return redirect('social:begin', backend='twitter')

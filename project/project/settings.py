@@ -142,17 +142,3 @@ SOCIAL_AUTH_LOGIN_REDIRECT_URL = '/twit/list'
 
 SOCIAL_AUTH_TWITTER_KEY = 'nQ1FbhLREforyjU3rmfE0mOai'
 SOCIAL_AUTH_TWITTER_SECRET = '3uaNilLha1dnpRvst6I2n5LcAnXFgH2nobGt74kr909XtJaxeS'
-
-PIPELINE = (
-  'social.pipeline.social_auth.social_details',
-  'social.pipeline.social_auth.social_uid',
-  'social.pipeline.social_auth.auth_allowed',
-  'social.pipeline.social_auth.social_user',
-  'social.pipeline.user.get_username',
-  # 'social.pipeline.mail.mail_validation',
-  'social.pipeline.social_auth.associate_by_email',
-  'social.pipeline.user.create_user',
-  'social.pipeline.social_auth.associate_user',
-  'social.pipeline.social_auth.load_extra_data',
-  'social.pipeline.user.user_details'
-)

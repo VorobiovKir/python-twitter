@@ -15,13 +15,13 @@ Including another URLconf
 """
 from django.conf.urls import url
 
-from .views import TwitListView, IndexView
+from .views import TwitListView
 from . import views
 
 
 urlpatterns = [
     url(r'^list/$', TwitListView.as_view(), name='twit-list'),
     url(r'^add/$', views.addTwit, name='twit-add'),
-    url(r'^$', IndexView.as_view(), name='twit-home'),
+    url(r'^login/$', views.login, name='twit-login'),
     url(r'^logout/$', views.logOut, name='twit-logout'),
 ]
