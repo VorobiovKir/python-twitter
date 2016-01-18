@@ -6,7 +6,6 @@
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
         <style type="text/css">
-
         .twit-txt {
             font-size: 18px;
             font-weight: bold;
@@ -25,20 +24,27 @@
             width: 100%;
             margin-bottom: 0px;
         }
-
         </style>
     </head>
     <body>
     {% if not user.is_authenticated %}
         <a href="{% url 'social:begin' 'twitter' %}">Twitter Login</a>
     {% else %}
-        <h1>Hello {{ user }}</h1>
         <div class="row">
             <div class="content col-sm-offset-4 col-sm-4">
+                <h1>Hello {{ user }}</h1>
                 <div class="panel panel-default">
-                    <div class="panel-heading"><h3 class="panel-title twit-head">Twitter</h3></div>
+                    <div class="panel-heading">
+                        <h3 class="panel-title twit-head">{{ tweets_content.user_detail.name }}</h3>
+                    </div>
                     <div class="panel-body">
-                        {% for tweet in tweets.tweets %}
+                        <ul>
+                            {% for user in authenticated_user %}
+                                <li><a href="{% url 'twit:twit-list' %}">{{ user.user }}</a></li>
+                            {% endfor %}
+                        </ul>
+                        <hr>
+                        {% for tweet in tweets_content.tweets %}
                             <p class="row">
                                 <span class="twit-txt col-sm-8">{{ tweet.status }}</span>
                                 <span class="twit-date col-sm-3 col-sm-offset-1">{{ tweet.date }}</span>
@@ -54,6 +60,12 @@
                         </p>
                     </div>
                 </div>
+                <h3>Followers: </h3>
+                <ul>
+                    {% for follower in tweets_content.followers %}
+                        <li>{{ follower.screen_name }}</li>
+                    {% endfor %}
+                </ul>
                 <div class="panel-footer">python-twitter</div>
             </div>
         </div>

@@ -47,6 +47,8 @@ INSTALLED_APPS = [
     'social.apps.django_app.default',
 
     'twitter_wall',
+
+    'debug_toolbar',
 ]
 
 SITE_ID = 1
