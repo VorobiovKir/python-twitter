@@ -98,7 +98,7 @@ class TwitListView(TemplateView):
 
         Add twitline and redirect on twitter list page
         """
-        if request.POST['twit-post-name']:
+        if request.POST.get('twit-post-name'):
             api = api_init(request)
             api.PostUpdate(request.POST['twit-post-name'])
 
