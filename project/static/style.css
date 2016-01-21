@@ -1,0 +1,22 @@
+.twit-txt {
+    font-size: 18px;
+    font-weight: bold;
+}
+.twit-date {
+    color: rgb(128, 128, 128);
+    font-size: 12px;
+}
+.twit-head {
+    color: rgb(50, 50, 255);
+    font-weight: bold;
+    font-size: 20px;
+    text-align: center;
+}
+.twit-post, .twit-post-btn {
+    width: 100%;
+    margin-bottom: 5px;
+}
+
+h1 {
+    color: tomato;
+}
